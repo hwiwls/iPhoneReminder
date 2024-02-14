@@ -16,7 +16,7 @@ class ReminderViewController: BaseViewController {
     
     let toolBar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 100)).then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.barTintColor = .black
+        $0.barTintColor = .clear
     }
 
     func configureCollectionViewLayout() -> UICollectionViewLayout {
