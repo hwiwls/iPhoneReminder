@@ -13,6 +13,11 @@ class ReminderViewController: BaseViewController {
     let cellImages = [UIImage(systemName: "calendar.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.blue), UIImage(systemName: "calendar.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.red), UIImage(systemName: "envelope.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray), UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray)]
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
+    
+    let toolBar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 100)).then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.barTintColor = .black
+    }
 
     func configureCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout().then {
@@ -32,12 +37,14 @@ class ReminderViewController: BaseViewController {
         
         configHierarchy()
         configView()
+        configToolbar()
         configLayout()
     }
     
     override func configHierarchy() {
         view.addSubviews([
-            collectionView
+            collectionView,
+            toolBar
         ])
     }
 
@@ -46,7 +53,20 @@ class ReminderViewController: BaseViewController {
         collectionView.dataSource = self
         collectionView.register(ReminderListCollectionViewCell.self, forCellWithReuseIdentifier: "ReminderListCollectionViewCell")
         collectionView.backgroundColor = .clear
+        
     }
+
+    func configToolbar() {
+        let toolbarItem1 = UIBarButtonItem(title: "새로운 미리 알림", style: .plain, target: self, action: #selector(addReminderBtn))
+        let toolbarItem2 = UIBarButtonItem(title: "목록 추가", style: .plain, target: self, action: #selector(addListBtn))
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        let items = [toolbarItem1, flexibleSpace, toolbarItem2]
+        
+        self.toolBar.setItems(items, animated: true)
+    }
+
     
     override func configLayout() {
         collectionView.snp.makeConstraints {
@@ -54,6 +74,22 @@ class ReminderViewController: BaseViewController {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(250)
         }
+        
+        toolBar.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+    }
+    
+    @objc func addReminderBtn() {
+        let vc = AddReminderViewController()
+        let nc = UINavigationController(rootViewController: vc)
+        present(nc, animated: true)
+    }
+    
+    @objc func addListBtn() {
+        print(#function)
     }
 }
 

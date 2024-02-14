@@ -17,6 +17,7 @@
 		2E0876082B7CE90300ABB27D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2E0876072B7CE90300ABB27D /* SnapKit */; };
 		2E08760B2B7CE90C00ABB27D /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 2E08760A2B7CE90C00ABB27D /* Then */; };
 		2E08760D2B7CE98800ABB27D /* ReminderListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E08760C2B7CE98800ABB27D /* ReminderListCollectionViewCell.swift */; };
+		2E08760F2B7D194800ABB27D /* AddReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E08760E2B7D194800ABB27D /* AddReminderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		2E0876012B7CE83700ABB27D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2E0876042B7CE8BD00ABB27D /* UIView+addSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addSubViews.swift"; sourceTree = "<group>"; };
 		2E08760C2B7CE98800ABB27D /* ReminderListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListCollectionViewCell.swift; sourceTree = "<group>"; };
+		2E08760E2B7D194800ABB27D /* AddReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		2E0875FF2B7CE51D00ABB27D /* AddReminder */ = {
 			isa = PBXGroup;
 			children = (
+				2E08760E2B7D194800ABB27D /* AddReminderViewController.swift */,
 			);
 			path = AddReminder;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				2E08760D2B7CE98800ABB27D /* ReminderListCollectionViewCell.swift in Sources */,
 				2E0876022B7CE83700ABB27D /* BaseViewController.swift in Sources */,
 				2E0875EB2B7CE36100ABB27D /* AppDelegate.swift in Sources */,
+				2E08760F2B7D194800ABB27D /* AddReminderViewController.swift in Sources */,
 				2E0875ED2B7CE36100ABB27D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
