@@ -99,8 +99,11 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 if let date = selectedDate {
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
-                    cell.subtitleLabel.text = formatter.string(from: date)
+                    let dateString = formatter.string(from: date)
+                    cell.subtitleLabel.text = dateString
                     cell.subtitleLabel.isHidden = false
+
+                    NotificationCenter.default.post(name: Notification.Name("DateReceived"), object: nil, userInfo: ["date": dateString])
                 }
             } else if indexPath.row == 1 {
                 cell.subtitleLabel.isHidden = true
@@ -155,8 +158,4 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.priorityBtn.menu = menu
         }
     }
-
-
-    
-    
 }

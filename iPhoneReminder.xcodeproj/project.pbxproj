@@ -22,6 +22,7 @@
 		2E0876142B7D293500ABB27D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876132B7D293500ABB27D /* DetailViewController.swift */; };
 		2E0876172B7D2C9A00ABB27D /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */; };
 		2E86C9562B7E4C9500009D59 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9552B7E4C9500009D59 /* DetailTableViewCell.swift */; };
+		2E86C9592B7E730300009D59 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9582B7E730300009D59 /* TimePickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		2E0876132B7D293500ABB27D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		2E86C9552B7E4C9500009D59 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		2E86C9582B7E730300009D59 /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				2E0875FF2B7CE51D00ABB27D /* AddReminder */,
 				2E0876122B7D292900ABB27D /* Detail */,
 				2E0876152B7D2C8200ABB27D /* Calendar */,
+				2E86C9572B7E72EA00009D59 /* Time */,
 				2E0876032B7CE8A300ABB27D /* Extension */,
 				2E0875F32B7CE36200ABB27D /* Assets.xcassets */,
 				2E0875F82B7CE36200ABB27D /* Info.plist */,
@@ -138,6 +141,14 @@
 				2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		2E86C9572B7E72EA00009D59 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				2E86C9582B7E730300009D59 /* TimePickerViewController.swift */,
+			);
+			path = Time;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E0876142B7D293500ABB27D /* DetailViewController.swift in Sources */,
+				2E86C9592B7E730300009D59 /* TimePickerViewController.swift in Sources */,
 				2E0876052B7CE8BD00ABB27D /* UIView+addSubViews.swift in Sources */,
 				2E0875EF2B7CE36100ABB27D /* ReminderListViewController.swift in Sources */,
 				2E0876172B7D2C9A00ABB27D /* DatePickerController.swift in Sources */,

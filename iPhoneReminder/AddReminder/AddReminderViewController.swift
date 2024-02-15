@@ -10,6 +10,8 @@ import SnapKit
 import Then
 
 class AddReminderViewController: BaseViewController {
+    var dateData = ""
+    
     let titleTextView = UITextView().then {
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.textColor = .lightGray
@@ -40,6 +42,14 @@ class AddReminderViewController: BaseViewController {
         configHierarchy()
         configLayout()
         configNavigation()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dateReceivedNotification), name: NSNotification.Name("DateReceived"), object: nil)
+    }
+    
+    @objc func dateReceivedNotification(notification: NSNotification) {
+        if let date = notification.userInfo?["date"] as? String {
+            dateData = date
+        }
     }
     
     override func configView() {
