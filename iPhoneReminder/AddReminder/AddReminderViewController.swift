@@ -11,6 +11,7 @@ import Then
 
 class AddReminderViewController: BaseViewController {
     var dateData = ""
+    var priorityData = ""
     
     let titleTextView = UITextView().then {
         $0.font = UIFont.systemFont(ofSize: 16)
@@ -44,11 +45,18 @@ class AddReminderViewController: BaseViewController {
         configNavigation()
         
         NotificationCenter.default.addObserver(self, selector: #selector(dateReceivedNotification), name: NSNotification.Name("DateReceived"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(priorityReceivedNotification), name: NSNotification.Name("PriorityReceived"), object: nil)
     }
     
     @objc func dateReceivedNotification(notification: NSNotification) {
         if let date = notification.userInfo?["date"] as? String {
             dateData = date
+        }
+    }
+    
+    @objc func priorityReceivedNotification(notification: NSNotification) {
+        if let priority = notification.userInfo?["priority"] as? String {
+            priorityData = priority
         }
     }
     

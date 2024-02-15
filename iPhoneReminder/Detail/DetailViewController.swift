@@ -146,6 +146,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             let priorityButtonClosure = { (action: UIAction) in
                 cell.priorityLabel.text = action.title
+                NotificationCenter.default.post(name: Notification.Name("PriorityReceived"), object: nil, userInfo: ["priority": action.title])
             }
             
             let menu = UIMenu(title: "우선순위 선택", children: [
