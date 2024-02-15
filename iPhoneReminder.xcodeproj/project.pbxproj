@@ -23,6 +23,8 @@
 		2E0876172B7D2C9A00ABB27D /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */; };
 		2E86C9562B7E4C9500009D59 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9552B7E4C9500009D59 /* DetailTableViewCell.swift */; };
 		2E86C9592B7E730300009D59 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9582B7E730300009D59 /* TimePickerViewController.swift */; };
+		2E86C95C2B7E78E100009D59 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2E86C95B2B7E78E100009D59 /* Realm */; };
+		2E86C95E2B7E78E100009D59 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2E86C95D2B7E78E100009D59 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E86C95E2B7E78E100009D59 /* RealmSwift in Frameworks */,
+				2E86C95C2B7E78E100009D59 /* Realm in Frameworks */,
 				2E0876082B7CE90300ABB27D /* SnapKit in Frameworks */,
 				2E08760B2B7CE90C00ABB27D /* Then in Frameworks */,
 			);
@@ -170,6 +174,8 @@
 			packageProductDependencies = (
 				2E0876072B7CE90300ABB27D /* SnapKit */,
 				2E08760A2B7CE90C00ABB27D /* Then */,
+				2E86C95B2B7E78E100009D59 /* Realm */,
+				2E86C95D2B7E78E100009D59 /* RealmSwift */,
 			);
 			productName = iPhoneReminder;
 			productReference = 2E0875E72B7CE36100ABB27D /* iPhoneReminder.app */;
@@ -202,6 +208,7 @@
 			packageReferences = (
 				2E0876062B7CE90300ABB27D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				2E0876092B7CE90C00ABB27D /* XCRemoteSwiftPackageReference "Then" */,
+				2E86C95A2B7E78E100009D59 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 2E0875E82B7CE36100ABB27D /* Products */;
 			projectDirPath = "";
@@ -473,6 +480,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		2E86C95A2B7E78E100009D59 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.47.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -485,6 +500,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E0876092B7CE90C00ABB27D /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		2E86C95B2B7E78E100009D59 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E86C95A2B7E78E100009D59 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		2E86C95D2B7E78E100009D59 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E86C95A2B7E78E100009D59 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
