@@ -8,9 +8,10 @@
 import UIKit
 import SnapKit
 import Then
+import RealmSwift
 
 class AddReminderViewController: BaseViewController {
-    var dateData = ""
+    var dateData = Date()
     var priorityData = ""
     
     let titleTextView = UITextView().then {
@@ -50,7 +51,7 @@ class AddReminderViewController: BaseViewController {
     
     @objc func dateReceivedNotification(notification: NSNotification) {
         if let date = notification.userInfo?["date"] as? Date {
-            print(date)
+            dateData = date
         }
     }
     
@@ -120,7 +121,16 @@ class AddReminderViewController: BaseViewController {
     }
 
     @objc func addButtonTapped() {
+        let realm = try! Realm()
         
+        print(realm.configuration.fileURL)
+        
+        let data = Reminder(title: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData)
+        
+        try! realm.write {
+            realm.add(data)
+            print("Realm Create")
+        }
     }
 }
 

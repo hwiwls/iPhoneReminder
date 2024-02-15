@@ -15,6 +15,7 @@ class BaseViewController: UIViewController {
         configHierarchy()
         configView()
         configLayout()
+        configNavigaiton()
     }
     
     func configHierarchy() {
@@ -26,6 +27,10 @@ class BaseViewController: UIViewController {
     }
     
     func configLayout() {
+        
+    }
+    
+    func configNavigaiton() {
         
     }
     

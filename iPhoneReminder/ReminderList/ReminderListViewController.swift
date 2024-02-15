@@ -108,6 +108,11 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 2 {
+            let vc = AllReminderViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 

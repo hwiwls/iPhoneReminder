@@ -14,11 +14,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-            window = UIWindow(frame: UIScreen.main.bounds)
-            window?.windowScene = windowScene
-            let tabBarController = ReminderViewController()
-            window?.rootViewController = tabBarController
-            window?.makeKeyAndVisible()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.windowScene = windowScene
+        let reminderViewController = ReminderViewController()
+        let navigationController = UINavigationController(rootViewController: reminderViewController)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

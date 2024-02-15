@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class AccountBookTable: Object {
+class Reminder: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String
     @Persisted var memo: String?
