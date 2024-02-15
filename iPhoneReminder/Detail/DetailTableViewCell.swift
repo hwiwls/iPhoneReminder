@@ -31,6 +31,12 @@ class DetailTableViewCell: UITableViewCell {
         $0.text = "없음"
         $0.font = .systemFont(ofSize: 16)
         $0.textColor = .lightGray
+        $0.isHidden = true
+    }
+    
+    let priorityBtn = UIButton().then {
+        $0.backgroundColor = .clear
+        $0.showsMenuAsPrimaryAction = true
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -41,6 +47,7 @@ class DetailTableViewCell: UITableViewCell {
         configView()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -50,7 +57,8 @@ class DetailTableViewCell: UITableViewCell {
             titleLabel,
             logoImageView,
             subtitleLabel,
-            priorityLabel
+            priorityLabel,
+            priorityBtn
         ])
     }
     
@@ -74,6 +82,10 @@ class DetailTableViewCell: UITableViewCell {
         priorityLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(16)
+        }
+        
+        priorityBtn.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     
