@@ -15,15 +15,7 @@ protocol DatePickerDelegate: AnyObject {
 
 class DetailViewController: BaseViewController, DatePickerDelegate {
     
-    let dayLabel = UILabel().then {
-        $0.text = ""
-        $0.font = .systemFont(ofSize: 15)
-        $0.textColor = .white
-    }
-    
-    let calendarBtn = UIButton().then {
-        $0.trailingBtnConfiguration(title: "날짜", font: .systemFont(ofSize: 16), foregroundColor: .white, padding: 270, image: UIImage(systemName: "calendar.circle.fill")?.withTintColor(.red), imageSize: CGSize(width: 28, height: 28))
-    }
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,39 +27,81 @@ class DetailViewController: BaseViewController, DatePickerDelegate {
     }
     
     override func configView() {
-        calendarBtn.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 45
+        tableView.backgroundColor = .clear
+        tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: "DetailTableViewCell")
     }
 
     @objc func calendarButtonTapped() {
-            let datePickerVC = DatePickerController()
-            datePickerVC.delegate = self
-            let navController = UINavigationController(rootViewController: datePickerVC)
-            present(navController, animated: true, completion: nil)
-        }
-
-        func didPick(date: Date) {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            dayLabel.text = formatter.string(from: date)
-        }
+        let datePickerVC = DatePickerController()
+        datePickerVC.delegate = self
+        let navController = UINavigationController(rootViewController: datePickerVC)
+        present(navController, animated: true, completion: nil)
+    }
+    
+    func didPick(date: Date) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+    }
    
     override func configHierarchy() {
         view.addSubviews([
-            calendarBtn,
-            dayLabel
+            tableView
         ])
     }
     
     override func configLayout() {
-        calendarBtn.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
-            $0.height.equalTo(40)
-        }
-        
-        dayLabel.snp.makeConstraints {
-            $0.top.equalTo(calendarBtn.snp.top).offset(10)
-            $0.leading.equalTo(calendarBtn.snp.leading).offset(50)
+        tableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
+}
+
+
+extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 2
+        case 1:
+            return 1
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as! DetailTableViewCell
+        switch indexPath.section {
+        case 0:
+            cell.priorityLabel.isHidden = true
+            if indexPath.row == 0 {
+                cell.titleLabel.text = "날짜"
+                cell.logoImageView.image = UIImage(systemName: "calendar")?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
+                cell.logoImageView.backgroundColor = .red
+            } else if indexPath.row == 1 {
+                cell.titleLabel.text = "시간"
+                cell.logoImageView.image = UIImage(systemName: "clock")?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
+                cell.logoImageView.backgroundColor = .blue
+            }
+        case 1:
+            cell.titleLabel.text = "우선순위"
+            cell.logoImageView.image = UIImage(systemName: "exclamationmark")?
+                .withRenderingMode(.alwaysOriginal)
+                .withTintColor(.white)
+            cell.logoImageView.backgroundColor = .red
+        default:
+            break
+        }
+        
+        return cell
+    }
+    
+    
 }

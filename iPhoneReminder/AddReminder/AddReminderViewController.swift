@@ -47,6 +47,7 @@ class AddReminderViewController: BaseViewController {
         memoTextView.delegate = self
         
         detailBtn.addTarget(self, action: #selector(detailBtnClicked), for: .touchUpInside)
+        detailBtn.layer.cornerRadius = 10
     }
     
     @objc func detailBtnClicked() {
@@ -67,7 +68,7 @@ class AddReminderViewController: BaseViewController {
         titleTextView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(10)
-            $0.height.equalTo(35)
+            $0.height.equalTo(40)
         }
         
         borderView.snp.makeConstraints {
@@ -85,7 +86,7 @@ class AddReminderViewController: BaseViewController {
         detailBtn.snp.makeConstraints {
             $0.top.equalTo(memoTextView.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(memoTextView)
-            $0.height.equalTo(40)
+            $0.height.equalTo(45)
         }
     }
     

@@ -101,9 +101,9 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReminderListCollectionViewCell", for: indexPath) as! ReminderListCollectionViewCell
         
-        cell.titleLabel.text = cellTitles[indexPath.row]
+        cell.titleLabel.text = cellTitles[indexPath.item]
         
-        cell.imageView.image = cellImages[indexPath.row]
+        cell.imageView.image = cellImages[indexPath.item]
 
         return cell
     }
