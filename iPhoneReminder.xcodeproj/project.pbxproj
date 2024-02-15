@@ -25,6 +25,7 @@
 		2E86C9592B7E730300009D59 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9582B7E730300009D59 /* TimePickerViewController.swift */; };
 		2E86C95C2B7E78E100009D59 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2E86C95B2B7E78E100009D59 /* Realm */; };
 		2E86C95E2B7E78E100009D59 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2E86C95D2B7E78E100009D59 /* RealmSwift */; };
+		2E86C9612B7E793B00009D59 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9602B7E793B00009D59 /* RealmModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		2E86C9552B7E4C9500009D59 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		2E86C9582B7E730300009D59 /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
+		2E86C9602B7E793B00009D59 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				2E0875EA2B7CE36100ABB27D /* AppDelegate.swift */,
 				2E0875EC2B7CE36100ABB27D /* SceneDelegate.swift */,
 				2E0875F52B7CE36200ABB27D /* LaunchScreen.storyboard */,
+				2E86C95F2B7E792E00009D59 /* Realm */,
 				2E0876002B7CE82D00ABB27D /* Base */,
 				2E0875FE2B7CE51000ABB27D /* ReminderList */,
 				2E0875FF2B7CE51D00ABB27D /* AddReminder */,
@@ -153,6 +156,14 @@
 				2E86C9582B7E730300009D59 /* TimePickerViewController.swift */,
 			);
 			path = Time;
+			sourceTree = "<group>";
+		};
+		2E86C95F2B7E792E00009D59 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				2E86C9602B7E793B00009D59 /* RealmModel.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +258,7 @@
 				2E08760F2B7D194800ABB27D /* AddReminderViewController.swift in Sources */,
 				2E0876112B7D26FB00ABB27D /* UIButton + Configuration.swift in Sources */,
 				2E0875ED2B7CE36100ABB27D /* SceneDelegate.swift in Sources */,
+				2E86C9612B7E793B00009D59 /* RealmModel.swift in Sources */,
 				2E86C9562B7E4C9500009D59 /* DetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

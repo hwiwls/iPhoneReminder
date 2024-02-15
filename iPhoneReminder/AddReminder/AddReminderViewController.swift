@@ -49,8 +49,8 @@ class AddReminderViewController: BaseViewController {
     }
     
     @objc func dateReceivedNotification(notification: NSNotification) {
-        if let date = notification.userInfo?["date"] as? String {
-            dateData = date
+        if let date = notification.userInfo?["date"] as? Date {
+            print(date)
         }
     }
     

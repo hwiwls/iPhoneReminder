@@ -53,6 +53,8 @@ class DetailViewController: BaseViewController, DatePickerDelegate {
          */
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.reloadRows(at: [indexPath], with: .automatic)
+        
+        NotificationCenter.default.post(name: Notification.Name("DateReceived"), object: nil, userInfo: ["date": date])
     }
    
     override func configHierarchy() {
@@ -98,12 +100,10 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.logoImageView.backgroundColor = .red
                 if let date = selectedDate {
                     let formatter = DateFormatter()
-                    formatter.dateFormat = "yyyy-MM-dd"
+                    formatter.dateFormat = "yyyy년 MM월 dd일"
                     let dateString = formatter.string(from: date)
                     cell.subtitleLabel.text = dateString
                     cell.subtitleLabel.isHidden = false
-
-                    NotificationCenter.default.post(name: Notification.Name("DateReceived"), object: nil, userInfo: ["date": dateString])
                 }
             } else if indexPath.row == 1 {
                 cell.subtitleLabel.isHidden = true
