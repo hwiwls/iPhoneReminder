@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 class ReminderViewController: BaseViewController {
+    
+    let repository = ReminderRepository()
+    
     let cellTitles = ["오늘", "예정", "전체", "완료됨"]
     let cellImages = [UIImage(systemName: "calendar.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.blue), UIImage(systemName: "calendar.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.red), UIImage(systemName: "envelope.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray), UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray)]
     
@@ -102,8 +105,11 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReminderListCollectionViewCell", for: indexPath) as! ReminderListCollectionViewCell
         
         cell.titleLabel.text = cellTitles[indexPath.item]
-        
         cell.imageView.image = cellImages[indexPath.item]
+        if indexPath.item == 0 {
+            let itemCount = repository.fetch().count
+            cell.countLabel.text = "\(itemCount)"
+        }
 
         return cell
     }
