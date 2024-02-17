@@ -69,18 +69,18 @@ class AllReminderViewController: BaseViewController {
         let sortAndFilterClosure = { (action: UIAction) in
             switch action.title {
             case "마감일 순으로 보기":
-                self.list = self.repository.fetch().sorted(byKeyPath: "date", ascending: true)
+                self.list = self.repository.fetchSortedByDate()
             case "제목 순으로 보기":
-                self.list = self.repository.fetch().sorted(byKeyPath: "title", ascending: true)
-            case "우선순위 낮은 것만 보기":
-                self.list = self.repository.fetch().filter("priority == '낮음'")
+                self.list = self.repository.fetchSortedByTitle()
+            case "우선순위 낮은만 보기":
+                self.list = self.repository.fetchWithLowPriority()
             default:
                 break
             }
             self.tableView.reloadData()
         }
         
-        let menu = UIMenu(title: "정렬", children: [
+        let menu = UIMenu(title: "정렬 및 필터링", children: [
             UIAction(title: "마감일 순으로 보기", handler: sortAndFilterClosure),
             UIAction(title: "제목 순으로 보기", handler: sortAndFilterClosure),
             UIAction(title: "우선순위 낮은만 보기", handler: sortAndFilterClosure)
@@ -89,6 +89,7 @@ class AllReminderViewController: BaseViewController {
         let item = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menu)
         navigationItem.rightBarButtonItem = item
     }
+
 
 }
 

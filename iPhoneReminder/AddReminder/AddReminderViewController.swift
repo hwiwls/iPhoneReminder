@@ -120,7 +120,7 @@ class AddReminderViewController: BaseViewController {
     @objc func addButtonTapped() {
         let realm = try! Realm()
         
-        print(realm.configuration.fileURL)
+        print(realm.configuration.fileURL ?? "")
         
         let data = Reminder(title: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData)
         
