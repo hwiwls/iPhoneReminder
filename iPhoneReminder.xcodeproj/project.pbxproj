@@ -28,6 +28,7 @@
 		2E86C9612B7E793B00009D59 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9602B7E793B00009D59 /* RealmModel.swift */; };
 		2E86C9642B7E7EC300009D59 /* AllReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9632B7E7EC300009D59 /* AllReminderViewController.swift */; };
 		2E86C9662B7E81B000009D59 /* AllReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9652B7E81B000009D59 /* AllReminderTableViewCell.swift */; };
+		2EC8AE012B811AD200C575D9 /* ReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8AE002B811AD200C575D9 /* ReminderRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		2E86C9602B7E793B00009D59 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		2E86C9632B7E7EC300009D59 /* AllReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReminderViewController.swift; sourceTree = "<group>"; };
 		2E86C9652B7E81B000009D59 /* AllReminderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReminderTableViewCell.swift; sourceTree = "<group>"; };
+		2EC8AE002B811AD200C575D9 /* ReminderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				2E86C9602B7E793B00009D59 /* RealmModel.swift */,
+				2EC8AE002B811AD200C575D9 /* ReminderRepository.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				2E0876022B7CE83700ABB27D /* BaseViewController.swift in Sources */,
 				2E0875EB2B7CE36100ABB27D /* AppDelegate.swift in Sources */,
 				2E86C9642B7E7EC300009D59 /* AllReminderViewController.swift in Sources */,
+				2EC8AE012B811AD200C575D9 /* ReminderRepository.swift in Sources */,
 				2E08760F2B7D194800ABB27D /* AddReminderViewController.swift in Sources */,
 				2E86C9662B7E81B000009D59 /* AllReminderTableViewCell.swift in Sources */,
 				2E0876112B7D26FB00ABB27D /* UIButton + Configuration.swift in Sources */,

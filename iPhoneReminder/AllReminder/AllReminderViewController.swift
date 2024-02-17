@@ -11,6 +11,9 @@ import Then
 import RealmSwift
 
 class AllReminderViewController: BaseViewController {
+    
+    let repository = ReminderRepository()
+    
     let titleLabel = UILabel().then {
         $0.text = "전체"
         $0.font = .boldSystemFont(ofSize: 24)
@@ -29,8 +32,8 @@ class AllReminderViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let realm = try! Realm()
-        list = realm.objects(Reminder.self)
+        list = repository.fetch()
+        
         tableView.reloadData()
     }
     

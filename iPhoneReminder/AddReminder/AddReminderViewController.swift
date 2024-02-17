@@ -13,6 +13,7 @@ import RealmSwift
 class AddReminderViewController: BaseViewController {
     var dateData = Date()
     var priorityData = ""
+    let repository = ReminderRepository()
     
     let titleTextView = UITextView().then {
         $0.font = UIFont.systemFont(ofSize: 16)
@@ -117,7 +118,7 @@ class AddReminderViewController: BaseViewController {
     }
 
     @objc func cancelButtonTapped() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     @objc func addButtonTapped() {
@@ -127,10 +128,8 @@ class AddReminderViewController: BaseViewController {
         
         let data = Reminder(title: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData)
         
-        try! realm.write {
-            realm.add(data)
-            print("Realm Create")
-        }
+        repository.createItem(data)
+        dismiss(animated: true, completion: nil)
     }
 }
 
