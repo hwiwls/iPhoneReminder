@@ -25,5 +25,23 @@ final class ReminderRepository {
     func fetch() -> Results<Reminder> {
         return realm.objects(Reminder.self)
     }
+    
+    func fetchSortedByDate(_ date: Date) -> Results<Reminder> {
+        return realm.objects(Reminder.self).where {
+            $0.date == date
+        }.sorted(byKeyPath: "date", ascending: true)
+    }
+    
+    func fetchSortedByTitle(_ title: String) -> Results<Reminder> {
+        return realm.objects(Reminder.self).where {
+            $0.title == title
+        }.sorted(byKeyPath: "title", ascending: true)
+    }
+    
+    func fetchWithLowPriority(_ priority: String) -> Results<Reminder> {
+        return realm.objects(Reminder.self).where {
+            $0.priority == priority
+        }.filter("priority == '낮음'")
+    }
 
 }

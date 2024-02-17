@@ -22,9 +22,6 @@ class DetailViewController: BaseViewController, DatePickerDelegate {
         super.viewDidLoad()
         let customDarkGray = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
         view.backgroundColor = customDarkGray
-        configView()
-        configHierarchy()
-        configLayout()
     }
     
     override func configView() {

@@ -41,10 +41,6 @@ class AddReminderViewController: BaseViewController {
         super.viewDidLoad()
         let customDarkGray = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
         view.backgroundColor = customDarkGray
-        configView()
-        configHierarchy()
-        configLayout()
-        configNavigation()
         
         NotificationCenter.default.addObserver(self, selector: #selector(dateReceivedNotification), name: NSNotification.Name("DateReceived"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(priorityReceivedNotification), name: NSNotification.Name("PriorityReceived"), object: nil)
