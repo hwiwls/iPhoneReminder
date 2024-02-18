@@ -37,6 +37,7 @@ class ReminderViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configToolbar() 
     }
     
     override func configHierarchy() {

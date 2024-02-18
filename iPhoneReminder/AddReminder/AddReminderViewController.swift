@@ -9,11 +9,13 @@ import UIKit
 import SnapKit
 import Then
 import RealmSwift
+import Toast
 
 class AddReminderViewController: BaseViewController {
     var dateData = Date()
     var priorityData = ""
     let repository = ReminderRepository()
+    var didBeginEditingTitle = false    // 제목 입력 여부
     
     let titleTextView = UITextView().then {
         $0.font = UIFont.systemFont(ofSize: 16)
@@ -39,6 +41,7 @@ class AddReminderViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let customDarkGray = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
         view.backgroundColor = customDarkGray
         
@@ -106,7 +109,7 @@ class AddReminderViewController: BaseViewController {
         }
     }
     
-    func configNavigation() {
+    override func configNavigaiton() {
         navigationItem.title = "새로운 미리 알림"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonTapped))
@@ -119,13 +122,16 @@ class AddReminderViewController: BaseViewController {
 
     @objc func addButtonTapped() {
         let realm = try! Realm()
-        
         print(realm.configuration.fileURL ?? "")
         
-        let data = Reminder(title: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData)
-        
-        repository.createItem(data)
-        dismiss(animated: true, completion: nil)
+        if titleTextView.text ==  "" || !didBeginEditingTitle {
+            self.view.makeToast(nil, duration: 1.0, position: .center, title: "제목을 입력해주세요")
+        } else {
+            let data = Reminder(title: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData)
+            
+            repository.createItem(data)
+            dismiss(animated: true, completion: nil)
+        }
     }
 }
 
@@ -134,6 +140,7 @@ extension AddReminderViewController: UITextViewDelegate {
         if textView.textColor == .lightGray {
             textView.text = nil
             textView.textColor = .black
+            didBeginEditingTitle = true
         }
     }
     
