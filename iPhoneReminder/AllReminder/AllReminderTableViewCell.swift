@@ -115,7 +115,11 @@ class AllReminderTableViewCell: UITableViewCell {
     func configure(with reminder: Reminder, formatDate: (Date?) -> String) {
         titleLabel.text = reminder.title
         memoLabel.text = reminder.memo
-        dateLabel.text = formatDate(reminder.date)
+        if reminder.date != nil {
+            dateLabel.text = formatDate(reminder.date)
+        } else {
+            dateLabel.isHidden = true
+        }
         priorityLabel.text = reminder.priority
         setup(with: reminder)
         

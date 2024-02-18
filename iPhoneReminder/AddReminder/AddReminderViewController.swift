@@ -12,7 +12,7 @@ import RealmSwift
 import Toast
 
 class AddReminderViewController: BaseViewController {
-    var dateData = Date()
+    var dateData: Date? = nil
     var priorityData = ""
     let repository = ReminderRepository()
     var didBeginEditingTitle = false    // 제목 입력 여부
