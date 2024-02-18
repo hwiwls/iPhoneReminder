@@ -16,6 +16,7 @@ class AddReminderViewController: BaseViewController {
     var priorityData = ""
     let repository = ReminderRepository()
     var didBeginEditingTitle = false    // 제목 입력 여부
+    var didBeginEditingMemo = false
     
     let titleTextView = UITextView().then {
         $0.font = UIFont.systemFont(ofSize: 16)
@@ -138,9 +139,28 @@ class AddReminderViewController: BaseViewController {
 
 extension AddReminderViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == .lightGray {
+        if textView.text == "제목" || textView.text == "메모" {
             textView.text = nil
-            didBeginEditingTitle = true
+            textView.textColor = .white
+            if textView == titleTextView {
+                didBeginEditingTitle = true
+            } else if textView == memoTextView {
+                didBeginEditingMemo = true
+            }
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if textView == titleTextView {
+                textView.text = "제목"
+                textView.textColor = .lightGray
+                didBeginEditingTitle = false
+            } else if textView == memoTextView {
+                textView.text = "메모"
+                textView.textColor = .lightGray
+                didBeginEditingMemo = false
+            }
         }
     }
 }
