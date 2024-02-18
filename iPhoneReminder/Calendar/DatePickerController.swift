@@ -36,7 +36,7 @@ class DatePickerController: BaseViewController {
         }
     }
     
-    func configNavigation() {
+    override func configNavigaiton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
     }
     

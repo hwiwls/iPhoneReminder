@@ -41,7 +41,7 @@ class AllReminderViewController: BaseViewController {
         view.backgroundColor = .black
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 45
+        tableView.rowHeight = 80
         tableView.backgroundColor = .clear
         tableView.register(AllReminderTableViewCell.self, forCellReuseIdentifier: "AllReminderTableViewCell")
     }
@@ -90,7 +90,15 @@ class AllReminderViewController: BaseViewController {
         navigationItem.rightBarButtonItem = item
     }
 
-
+    func formatDate(_ date: Date?) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        if let date = date {
+            return formatter.string(from: date)
+        } else {
+            return formatter.string(from: Date())
+        }
+    }
 }
 
 extension AllReminderViewController: UITableViewDelegate, UITableViewDataSource {
@@ -104,10 +112,18 @@ extension AllReminderViewController: UITableViewDelegate, UITableViewDataSource 
         cell.selectionStyle = .none
         
         let row = list[indexPath.row]
-        cell.titleLabel.text = "할 일: \(row.title), 마감일: \(row.date ?? Date())"
+        cell.titleLabel.text = row.title
+        cell.memoLabel.text = row.memo
+        cell.dateLabel.text = formatDate(row.date)
+        cell.setup(with: list[indexPath.row])
         
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            repository.deleteItem(list[indexPath.row])
+            tableView.reloadData()
+        }
+    }
 }

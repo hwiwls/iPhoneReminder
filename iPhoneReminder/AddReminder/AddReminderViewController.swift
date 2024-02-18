@@ -131,6 +131,7 @@ class AddReminderViewController: BaseViewController {
             
             repository.createItem(data)
             dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddReminderDismissed"), object: nil)
         }
     }
 }
@@ -139,15 +140,7 @@ extension AddReminderViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .lightGray {
             textView.text = nil
-            textView.textColor = .black
             didBeginEditingTitle = true
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = textView == titleTextView ? "제목" : "메모"
-            textView.textColor = .lightGray
         }
     }
 }

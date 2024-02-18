@@ -37,7 +37,18 @@ class ReminderViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configToolbar() 
+        configToolbar()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name(rawValue: "AddReminderDismissed"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
+    
+    @objc func reloadCollectionView() {
+        let indexPath = IndexPath(item: 2, section: 0)
+        collectionView.reloadItems(at: [indexPath])
     }
     
     override func configHierarchy() {
@@ -102,7 +113,13 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
         
         cell.titleLabel.text = cellTitles[indexPath.item]
         cell.imageView.image = cellImages[indexPath.item]
-        if indexPath.item == 0 {
+        
+        if indexPath.item == 1 {
+            let itemCount = repository.fetchIsDoneItems().count
+            cell.countLabel.text = "\(itemCount)"
+        }
+        
+        if indexPath.item == 2 {
             let itemCount = repository.fetch().count
             cell.countLabel.text = "\(itemCount)"
         }

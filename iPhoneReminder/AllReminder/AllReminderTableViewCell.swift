@@ -10,10 +10,32 @@ import SnapKit
 import Then
 
 class AllReminderTableViewCell: UITableViewCell {
+    
+    let repository = ReminderRepository()
+    
+    var reminder: Reminder?
+    
+    let isDoneBtn = UIButton().then {
+        $0.setImage(UIImage(systemName: "circle")?.withRenderingMode(.alwaysOriginal).withTintColor(.white), for: .normal)
+        $0.setImage(UIImage(systemName: "button.programmable")?.withRenderingMode(.alwaysOriginal).withTintColor(.white), for: .selected)
+    }
+    
     let titleLabel = UILabel().then {
         $0.text = "title"
         $0.font = .systemFont(ofSize: 16)
         $0.textColor = .white
+    }
+    
+    let memoLabel = UILabel().then {
+        $0.text = "memo"
+        $0.font = .systemFont(ofSize: 15)
+        $0.textColor = .lightGray
+    }
+    
+    let dateLabel = UILabel().then {
+        $0.text = "date"
+        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .systemBlue
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -30,19 +52,51 @@ class AllReminderTableViewCell: UITableViewCell {
     
     func configHierarchy() {
         contentView.addSubviews([
-            titleLabel
+            isDoneBtn,
+            titleLabel,
+            memoLabel,
+            dateLabel
         ])
     }
     
     func configLayout() {
+        isDoneBtn.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(12)
+            $0.leading.equalToSuperview().offset(20)
+            $0.width.height.equalTo(20)
+        }
+        
         titleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(12)
+            $0.top.equalTo(isDoneBtn)
+            $0.leading.equalTo(isDoneBtn.snp.trailing).offset(12)
+            $0.trailing.equalToSuperview().inset(12)
+        }
+        
+        memoLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalTo(titleLabel)
+        }
+        
+        dateLabel.snp.makeConstraints {
+            $0.top.equalTo(memoLabel.snp.bottom).offset(8)
+            $0.leading.equalTo(titleLabel)
         }
     }
     
     func configView() {
         backgroundColor = .clear
+        isDoneBtn.addTarget(self, action: #selector(handleCheckMarkButton), for: .touchUpInside)
     }
     
+    @objc func handleCheckMarkButton() {
+        isDoneBtn.isSelected = !isDoneBtn.isSelected
+        if let reminder = self.reminder {
+            repository.updateItemIsDone(id: reminder.id, isDone: isDoneBtn.isSelected)
+        }
+    }
+    
+    func setup(with reminder: Reminder) {
+        self.reminder = reminder
+        isDoneBtn.isSelected = reminder.isDone
+    }
 }

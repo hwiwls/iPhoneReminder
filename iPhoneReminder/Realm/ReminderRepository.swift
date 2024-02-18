@@ -37,5 +37,31 @@ final class ReminderRepository {
     func fetchWithLowPriority() -> Results<Reminder> {
         return realm.objects(Reminder.self).filter("priority == '낮음'")
     }
-
+    
+    func fetchIsDoneItems() -> Results<Reminder> {
+        return realm.objects(Reminder.self).filter("isDone == true")
+    }
+    
+    func updateItemIsDone(id: ObjectId, isDone: Bool) {
+        do {
+            try realm.write {
+                realm.create(Reminder.self, value: [
+                    "id": id,
+                    "isDone": isDone
+                ], update: .modified)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func deleteItem(_ item: Reminder) {
+        do {
+            try realm.write {
+                realm.delete(item)
+            }
+        } catch {
+            print(error)
+        }
+    }
 }
