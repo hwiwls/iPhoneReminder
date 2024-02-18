@@ -11,16 +11,16 @@ import Then
 
 class AllReminderTableViewCell: UITableViewCell {
     
-    let repository = ReminderRepository()
+    private let repository = ReminderRepository()
     
-    var reminder: Reminder?
+    private var reminder: Reminder?
     
     let isDoneBtn = UIButton().then {
         $0.setImage(UIImage(systemName: "circle")?.withRenderingMode(.alwaysOriginal).withTintColor(.white), for: .normal)
         $0.setImage(UIImage(systemName: "button.programmable")?.withRenderingMode(.alwaysOriginal).withTintColor(.white), for: .selected)
     }
     
-    let titleLabel = UILabel().then {
+     let titleLabel = UILabel().then {
         $0.text = "title"
         $0.font = .systemFont(ofSize: 16)
         $0.textColor = .white
@@ -34,6 +34,12 @@ class AllReminderTableViewCell: UITableViewCell {
     
     let dateLabel = UILabel().then {
         $0.text = "date"
+        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .systemBlue
+    }
+    
+    let priorityLabel = UILabel().then {
+        $0.text = "priority"
         $0.font = .systemFont(ofSize: 14)
         $0.textColor = .systemBlue
     }
@@ -55,7 +61,8 @@ class AllReminderTableViewCell: UITableViewCell {
             isDoneBtn,
             titleLabel,
             memoLabel,
-            dateLabel
+            dateLabel,
+            priorityLabel
         ])
     }
     
@@ -73,13 +80,18 @@ class AllReminderTableViewCell: UITableViewCell {
         }
         
         memoLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.leading.trailing.equalTo(titleLabel)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(memoLabel.snp.bottom).offset(8)
+            $0.bottom.equalToSuperview().offset(-8)
             $0.leading.equalTo(titleLabel)
+        }
+        
+        priorityLabel.snp.makeConstraints {
+            $0.leading.equalTo(dateLabel.snp.trailing).offset(8)
+            $0.bottom.equalTo(dateLabel)
         }
     }
     
@@ -98,5 +110,24 @@ class AllReminderTableViewCell: UITableViewCell {
     func setup(with reminder: Reminder) {
         self.reminder = reminder
         isDoneBtn.isSelected = reminder.isDone
+    }
+    
+    func configure(with reminder: Reminder, formatDate: (Date?) -> String) {
+        titleLabel.text = reminder.title
+        memoLabel.text = reminder.memo
+        dateLabel.text = formatDate(reminder.date)
+        priorityLabel.text = reminder.priority
+        setup(with: reminder)
+        
+        switch reminder.priority {
+        case "높음":
+        priorityLabel.text = "!!!" + (reminder.priority ?? "")
+        case "중간":
+        priorityLabel.text = "!!" + (reminder.priority ?? "")
+        case "낮음":
+        priorityLabel.text = "!" + (reminder.priority ?? "")
+        default:
+            priorityLabel.text = reminder.priority
+        }
     }
 }

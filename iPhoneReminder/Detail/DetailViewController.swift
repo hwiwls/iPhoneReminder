@@ -67,7 +67,6 @@ class DetailViewController: BaseViewController, DatePickerDelegate {
     }
 }
 
-
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2

@@ -108,14 +108,10 @@ extension AllReminderViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllReminderTableViewCell", for: indexPath) as! AllReminderTableViewCell
-        
         cell.selectionStyle = .none
         
         let row = list[indexPath.row]
-        cell.titleLabel.text = row.title
-        cell.memoLabel.text = row.memo
-        cell.dateLabel.text = formatDate(row.date)
-        cell.setup(with: list[indexPath.row])
+        cell.configure(with: row, formatDate: formatDate)
         
         return cell
     }
@@ -126,4 +122,6 @@ extension AllReminderViewController: UITableViewDelegate, UITableViewDataSource 
             tableView.reloadData()
         }
     }
+    
+    
 }
