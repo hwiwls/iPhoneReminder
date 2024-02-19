@@ -11,7 +11,18 @@ import Then
 import RealmSwift
 import Toast
 
-class AddReminderViewController: BaseViewController {
+protocol ImagePickerDelegate: AnyObject {
+    func didPick(image: UIImage)
+}
+
+class AddReminderViewController: BaseViewController, ImagePickerDelegate {
+    
+    var takenImage: UIImage? = nil
+    
+    func didPick(image: UIImage) {
+        takenImage = image
+    }
+    
     let realm = try! Realm()
     var dateData: Date? = nil
     var priorityData = ""
@@ -24,6 +35,8 @@ class AddReminderViewController: BaseViewController {
         $0.textColor = .lightGray
         $0.text = "제목"
         $0.backgroundColor = .darkGray
+        $0.autocorrectionType = .no
+        $0.spellCheckingType = .no
     }
     
     let borderView = UIView().then {
@@ -35,6 +48,8 @@ class AddReminderViewController: BaseViewController {
         $0.textColor = .lightGray
         $0.text = "메모"
         $0.backgroundColor = .darkGray
+        $0.autocorrectionType = .no
+        $0.spellCheckingType = .no
     }
     
     let detailBtn = UIButton().then {
@@ -74,6 +89,7 @@ class AddReminderViewController: BaseViewController {
     
     @objc func detailBtnClicked() {
         let vc = DetailViewController()
+        vc.imagePickerDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -134,6 +150,10 @@ class AddReminderViewController: BaseViewController {
             repository.createItem(data)
             dismiss(animated: true, completion: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddReminderDismissed"), object: nil)
+            
+            if let image = takenImage {
+                saveImageToDocument(image: image, filename: "\(data.id)")
+            }
         }
     }
 }

@@ -12,12 +12,14 @@ import Then
 class DetailTableViewCell: UITableViewCell {
     let logoImageView = UIImageView().then {
         $0.image = UIImage(systemName: "plus.circle.fill")
+        $0.isUserInteractionEnabled = false
     }
     
     let titleLabel = UILabel().then {
         $0.text = "title"
         $0.font = .systemFont(ofSize: 16)
         $0.textColor = .white
+        $0.isUserInteractionEnabled = false
     }
     
     let subtitleLabel = UILabel().then {
@@ -25,6 +27,7 @@ class DetailTableViewCell: UITableViewCell {
         $0.font = .systemFont(ofSize: 12)
         $0.textColor = .systemBlue
         $0.isHidden = true
+        $0.isUserInteractionEnabled = false
     }
     
     let priorityLabel = UILabel().then {

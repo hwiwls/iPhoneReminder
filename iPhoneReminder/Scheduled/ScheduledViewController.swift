@@ -31,7 +31,7 @@ class ScheduledViewController: BaseViewController {
         
         let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
         
-        let predicate = NSPredicate(format: "date < %@ || date >= %@", start as NSDate, end as NSDate)
+        let predicate = NSPredicate(format: "date < %@ || date > %@", start as NSDate, end as NSDate)
         
         list = realm.objects(Reminder.self).filter(predicate)
     }
@@ -93,6 +93,10 @@ extension ScheduledViewController: UITableViewDelegate, UITableViewDataSource {
         
         print(list[indexPath.row])
         cell.configure(with: row, formatDate: formatDate)
+        
+        if let image = loadImageToDocument(filename: "\(row.id)") {
+            cell.todoImageView.image = image
+        }
         
         return cell
     }

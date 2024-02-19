@@ -18,11 +18,26 @@ class DetailViewController: BaseViewController, CalendarDelegate {
     var selectedDate: Date?
     
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    
+    weak var imagePickerDelegate: ImagePickerDelegate?
+    
+    let photoImageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let customDarkGray = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
         view.backgroundColor = customDarkGray
+        
+        print("tableView.allowsSelection: \(tableView.allowsSelection)")
+        print("tableView.allowsMultipleSelection: \(tableView.allowsMultipleSelection)")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if let image = photoImageView.image {
+            imagePickerDelegate?.didPick(image: image)
+        }
     }
     
     override func configView() {
@@ -57,13 +72,21 @@ class DetailViewController: BaseViewController, CalendarDelegate {
    
     override func configHierarchy() {
         view.addSubviews([
-            tableView
+            tableView,
+            photoImageView
         ])
     }
     
     override func configLayout() {
         tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.top.trailing.equalToSuperview()
+            $0.height.equalTo(350)
+        }
+        
+        photoImageView.snp.makeConstraints {
+            $0.top.equalTo(tableView.snp.bottom).offset(20)
+            $0.size.equalTo(350)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
     }
 }
@@ -96,7 +119,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 cell.titleLabel.text = "날짜"
                 cell.logoImageView.image = UIImage(systemName: "calendar")?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
-                cell.logoImageView.backgroundColor = .red
                 if let date = selectedDate {
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy년 MM월 dd일"
@@ -119,7 +141,10 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell.logoImageView.backgroundColor = .red
             
         case 2:
-            cell.titleLabel.text = "이미지 등록"
+            cell.subtitleLabel.isHidden = true
+            cell.priorityLabel.isHidden = true
+            cell.priorityBtn.isHidden = true
+            cell.titleLabel.text = "이미지 추가"
             cell.logoImageView.image = UIImage(systemName: "photo")?
                 .withRenderingMode(.alwaysOriginal)
                 .withTintColor(.white)
@@ -141,8 +166,16 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 1 {
                 print("두번째 cell")
             }
+        } else if indexPath.section == 1 {
+            print("시간 등록하기")
         } else if indexPath.section == 2 {
-            print("이미지 등록하기")
+            if indexPath.row == 0 {
+                print("이미지 추가 cell을 클릭하셨습니다.")
+                let vc = UIImagePickerController()
+                vc.allowsEditing = true
+                vc.delegate = self
+                present(vc, animated: true)
+            }
         } else {
             print("그 외")
         }
@@ -166,5 +199,18 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.priorityBtn.menu = menu
         }
+    }
+}
+
+extension DetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            photoImageView.image = pickedImage
+        }
+        
+        dismiss(animated: true)
     }
 }

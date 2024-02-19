@@ -113,6 +113,10 @@ extension AllReminderViewController: UITableViewDelegate, UITableViewDataSource 
         let row = list[indexPath.row]
         cell.configure(with: row, formatDate: formatDate)
         
+        if let image = loadImageToDocument(filename: "\(row.id)") {
+            cell.todoImageView.image = image
+        }
+        
         return cell
     }
     

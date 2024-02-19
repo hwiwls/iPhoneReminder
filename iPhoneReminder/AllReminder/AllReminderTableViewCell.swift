@@ -20,7 +20,7 @@ class AllReminderTableViewCell: UITableViewCell {
         $0.setImage(UIImage(systemName: "button.programmable")?.withRenderingMode(.alwaysOriginal).withTintColor(.white), for: .selected)
     }
     
-     let titleLabel = UILabel().then {
+    let titleLabel = UILabel().then {
         $0.text = "title"
         $0.font = .systemFont(ofSize: 16)
         $0.textColor = .white
@@ -44,6 +44,8 @@ class AllReminderTableViewCell: UITableViewCell {
         $0.textColor = .systemBlue
     }
     
+    let todoImageView = UIImageView()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -62,7 +64,8 @@ class AllReminderTableViewCell: UITableViewCell {
             titleLabel,
             memoLabel,
             dateLabel,
-            priorityLabel
+            priorityLabel,
+            todoImageView
         ])
     }
     
@@ -92,6 +95,12 @@ class AllReminderTableViewCell: UITableViewCell {
         priorityLabel.snp.makeConstraints {
             $0.leading.equalTo(dateLabel.snp.trailing).offset(8)
             $0.bottom.equalTo(dateLabel)
+        }
+        
+        todoImageView.snp.makeConstraints {
+            $0.size.equalTo(50)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.centerY.equalToSuperview()
         }
     }
     
