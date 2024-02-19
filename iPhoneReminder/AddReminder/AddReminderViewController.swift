@@ -12,6 +12,7 @@ import RealmSwift
 import Toast
 
 class AddReminderViewController: BaseViewController {
+    let realm = try! Realm()
     var dateData: Date? = nil
     var priorityData = ""
     let repository = ReminderRepository()
@@ -47,6 +48,7 @@ class AddReminderViewController: BaseViewController {
         view.backgroundColor = customDarkGray
         
         NotificationCenter.default.addObserver(self, selector: #selector(dateReceivedNotification), name: NSNotification.Name("DateReceived"), object: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(priorityReceivedNotification), name: NSNotification.Name("PriorityReceived"), object: nil)
     }
     
@@ -122,7 +124,6 @@ class AddReminderViewController: BaseViewController {
     }
 
     @objc func addButtonTapped() {
-        let realm = try! Realm()
         print(realm.configuration.fileURL ?? "")
         
         if titleTextView.text ==  "" || !didBeginEditingTitle {

@@ -8,12 +8,13 @@
 import UIKit
 import SnapKit
 import Then
+import FSCalendar
 
-protocol DatePickerDelegate: AnyObject {
+protocol CalendarDelegate: AnyObject {
     func didPick(date: Date)
 }
 
-class DetailViewController: BaseViewController, DatePickerDelegate {
+class DetailViewController: BaseViewController, CalendarDelegate {
     var selectedDate: Date?
     
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -33,9 +34,9 @@ class DetailViewController: BaseViewController, DatePickerDelegate {
     }
 
     @objc func calendarButtonTapped() {
-        let datePickerVC = DatePickerController()
-        datePickerVC.delegate = self
-        let navController = UINavigationController(rootViewController: datePickerVC)
+        let calendarVC = CalendarViewController()
+        calendarVC.delegate = self
+        let navController = UINavigationController(rootViewController: calendarVC)
         present(navController, animated: true, completion: nil)
     }
     
@@ -133,9 +134,9 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                let datePickerVC = DatePickerController()
-                datePickerVC.delegate = self
-                let navController = UINavigationController(rootViewController: datePickerVC)
+                let calendarVC = CalendarViewController()
+                calendarVC.delegate = self
+                let navController = UINavigationController(rootViewController: calendarVC)
                 present(navController, animated: true, completion: nil)
             } else if indexPath.row == 1 {
                 print("두번째 cell")

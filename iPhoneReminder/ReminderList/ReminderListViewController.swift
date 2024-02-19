@@ -47,8 +47,14 @@ class ReminderViewController: BaseViewController {
     }
     
     @objc func reloadCollectionView() {
-        let indexPath = IndexPath(item: 2, section: 0)
-        collectionView.reloadItems(at: [indexPath])
+        let indexPath2 = IndexPath(item: 2, section: 0)
+        collectionView.reloadItems(at: [indexPath2])
+        
+        let indexPath1 = IndexPath(item: 1, section: 0)
+        collectionView.reloadItems(at: [indexPath1])
+        
+        let indexPath0 = IndexPath(item: 0, section: 0)
+        collectionView.reloadItems(at: [indexPath0])
     }
     
     override func configHierarchy() {
@@ -114,12 +120,13 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
         cell.titleLabel.text = cellTitles[indexPath.item]
         cell.imageView.image = cellImages[indexPath.item]
         
-        if indexPath.item == 1 {
+        if indexPath.item == 0 {
+            let itemCount = repository.fetchTodayItems().count
+            cell.countLabel.text = "\(itemCount)"
+        } else if indexPath.item == 1 {
             let itemCount = repository.fetchIsDoneItems().count
             cell.countLabel.text = "\(itemCount)"
-        }
-        
-        if indexPath.item == 2 {
+        } else if indexPath.item == 2 {
             let itemCount = repository.fetch().count
             cell.countLabel.text = "\(itemCount)"
         }
@@ -128,7 +135,10 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 2 {
+        if indexPath.item == 0 {
+            let vc = TodayReminderViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.item == 2 {
             let vc = AllReminderViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }

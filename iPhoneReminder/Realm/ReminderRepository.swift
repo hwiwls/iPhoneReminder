@@ -42,6 +42,14 @@ final class ReminderRepository {
         return realm.objects(Reminder.self).filter("isDone == true")
     }
     
+    func fetchTodayItems() -> Results<Reminder> {
+        let start = Calendar.current.startOfDay(for: Date())
+        
+        let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
+        let predicate = NSPredicate(format: "date >= %@ && date < %@", start as NSDate, end as NSDate)
+        return realm.objects(Reminder.self).filter(predicate)
+    }
+    
     func updateItemIsDone(id: ObjectId, isDone: Bool) {
         do {
             try realm.write {

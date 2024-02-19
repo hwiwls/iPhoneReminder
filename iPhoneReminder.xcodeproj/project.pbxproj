@@ -20,8 +20,10 @@
 		2E08760F2B7D194800ABB27D /* AddReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E08760E2B7D194800ABB27D /* AddReminderViewController.swift */; };
 		2E0876112B7D26FB00ABB27D /* UIButton + Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876102B7D26FB00ABB27D /* UIButton + Configuration.swift */; };
 		2E0876142B7D293500ABB27D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876132B7D293500ABB27D /* DetailViewController.swift */; };
-		2E0876172B7D2C9A00ABB27D /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */; };
+		2E0876172B7D2C9A00ABB27D /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876162B7D2C9A00ABB27D /* CalendarViewController.swift */; };
 		2E4D89AA2B833B1E000702B8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4D89A92B833B1E000702B8 /* FileManager+Extension.swift */; };
+		2E4D89AD2B834136000702B8 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 2E4D89AC2B834136000702B8 /* FSCalendar */; };
+		2E4D89B02B83586F000702B8 /* TodayReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4D89AF2B83586F000702B8 /* TodayReminderViewController.swift */; };
 		2E86C9562B7E4C9500009D59 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9552B7E4C9500009D59 /* DetailTableViewCell.swift */; };
 		2E86C9592B7E730300009D59 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9582B7E730300009D59 /* TimePickerViewController.swift */; };
 		2E86C95C2B7E78E100009D59 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2E86C95B2B7E78E100009D59 /* Realm */; };
@@ -47,8 +49,9 @@
 		2E08760E2B7D194800ABB27D /* AddReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderViewController.swift; sourceTree = "<group>"; };
 		2E0876102B7D26FB00ABB27D /* UIButton + Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Configuration.swift"; sourceTree = "<group>"; };
 		2E0876132B7D293500ABB27D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
+		2E0876162B7D2C9A00ABB27D /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		2E4D89A92B833B1E000702B8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		2E4D89AF2B83586F000702B8 /* TodayReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayReminderViewController.swift; sourceTree = "<group>"; };
 		2E86C9552B7E4C9500009D59 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		2E86C9582B7E730300009D59 /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		2E86C9602B7E793B00009D59 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
@@ -63,6 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E86C95E2B7E78E100009D59 /* RealmSwift in Frameworks */,
+				2E4D89AD2B834136000702B8 /* FSCalendar in Frameworks */,
 				2E86C95C2B7E78E100009D59 /* Realm in Frameworks */,
 				2E0876082B7CE90300ABB27D /* SnapKit in Frameworks */,
 				2ED5DF8C2B820187000EE2DC /* Toast in Frameworks */,
@@ -99,6 +103,7 @@
 				2E0876002B7CE82D00ABB27D /* Base */,
 				2E0875FE2B7CE51000ABB27D /* ReminderList */,
 				2E86C9622B7E7EB300009D59 /* AllReminder */,
+				2E4D89AE2B83584C000702B8 /* TodayReminder */,
 				2E0875FF2B7CE51D00ABB27D /* AddReminder */,
 				2E0876122B7D292900ABB27D /* Detail */,
 				2E0876152B7D2C8200ABB27D /* Calendar */,
@@ -157,9 +162,17 @@
 		2E0876152B7D2C8200ABB27D /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */,
+				2E0876162B7D2C9A00ABB27D /* CalendarViewController.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		2E4D89AE2B83584C000702B8 /* TodayReminder */ = {
+			isa = PBXGroup;
+			children = (
+				2E4D89AF2B83586F000702B8 /* TodayReminderViewController.swift */,
+			);
+			path = TodayReminder;
 			sourceTree = "<group>";
 		};
 		2E86C9572B7E72EA00009D59 /* Time */ = {
@@ -210,6 +223,7 @@
 				2E86C95B2B7E78E100009D59 /* Realm */,
 				2E86C95D2B7E78E100009D59 /* RealmSwift */,
 				2ED5DF8B2B820187000EE2DC /* Toast */,
+				2E4D89AC2B834136000702B8 /* FSCalendar */,
 			);
 			productName = iPhoneReminder;
 			productReference = 2E0875E72B7CE36100ABB27D /* iPhoneReminder.app */;
@@ -244,6 +258,7 @@
 				2E0876092B7CE90C00ABB27D /* XCRemoteSwiftPackageReference "Then" */,
 				2E86C95A2B7E78E100009D59 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				2ED5DF8A2B820187000EE2DC /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				2E4D89AB2B834136000702B8 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 2E0875E82B7CE36100ABB27D /* Products */;
 			projectDirPath = "";
@@ -275,7 +290,7 @@
 				2E86C9592B7E730300009D59 /* TimePickerViewController.swift in Sources */,
 				2E0876052B7CE8BD00ABB27D /* UIView+addSubViews.swift in Sources */,
 				2E0875EF2B7CE36100ABB27D /* ReminderListViewController.swift in Sources */,
-				2E0876172B7D2C9A00ABB27D /* DatePickerController.swift in Sources */,
+				2E0876172B7D2C9A00ABB27D /* CalendarViewController.swift in Sources */,
 				2E08760D2B7CE98800ABB27D /* ReminderListCollectionViewCell.swift in Sources */,
 				2E0876022B7CE83700ABB27D /* BaseViewController.swift in Sources */,
 				2E0875EB2B7CE36100ABB27D /* AppDelegate.swift in Sources */,
@@ -283,6 +298,7 @@
 				2EC8AE012B811AD200C575D9 /* ReminderRepository.swift in Sources */,
 				2E08760F2B7D194800ABB27D /* AddReminderViewController.swift in Sources */,
 				2E4D89AA2B833B1E000702B8 /* FileManager+Extension.swift in Sources */,
+				2E4D89B02B83586F000702B8 /* TodayReminderViewController.swift in Sources */,
 				2E86C9662B7E81B000009D59 /* AllReminderTableViewCell.swift in Sources */,
 				2E0876112B7D26FB00ABB27D /* UIButton + Configuration.swift in Sources */,
 				2E0875ED2B7CE36100ABB27D /* SceneDelegate.swift in Sources */,
@@ -520,6 +536,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		2E4D89AB2B834136000702B8 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 		2E86C95A2B7E78E100009D59 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -548,6 +572,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E0876092B7CE90C00ABB27D /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		2E4D89AC2B834136000702B8 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E4D89AB2B834136000702B8 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 		2E86C95B2B7E78E100009D59 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

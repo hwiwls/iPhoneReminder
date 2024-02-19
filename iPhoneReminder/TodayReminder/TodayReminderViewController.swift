@@ -1,8 +1,8 @@
 //
-//  AllReminderViewController.swift
+//  TodayReminderViewController.swift
 //  iPhoneReminder
 //
-//  Created by hwijinjeong on 2/16/24.
+//  Created by hwijinjeong on 2/19/24.
 //
 
 import UIKit
@@ -10,32 +10,32 @@ import SnapKit
 import Then
 import RealmSwift
 
-class AllReminderViewController: BaseViewController {
+class TodayReminderViewController: BaseViewController {
     
+    let realm = try! Realm()
+    var list: Results<Reminder>!
     let repository = ReminderRepository()
     
     let titleLabel = UILabel().then {
-        $0.text = "전체"
+        $0.text = "오늘"
         $0.font = .boldSystemFont(ofSize: 24)
         $0.textColor = .white
     }
     
     let tableView = UITableView()
-    
-    var list: Results<Reminder>!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let start = Calendar.current.startOfDay(for: Date())
+        
+        let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
+        
+        let predicate = NSPredicate(format: "date >= %@ && date < %@", start as NSDate, end as NSDate)
+        
+        list = realm.objects(Reminder.self).filter(predicate)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        list = repository.fetch()
-        
-        tableView.reloadData()
-    }
     
     override func configView() {
         view.backgroundColor = .black
@@ -66,30 +66,9 @@ class AllReminderViewController: BaseViewController {
     }
     
     override func configNavigaiton() {
-        let sortAndFilterClosure = { (action: UIAction) in
-            switch action.title {
-            case "마감일 순으로 보기":
-                self.list = self.repository.fetchSortedByDate()
-            case "제목 순으로 보기":
-                self.list = self.repository.fetchSortedByTitle()
-            case "우선순위 낮은만 보기":
-                self.list = self.repository.fetchWithLowPriority()
-            default:
-                break
-            }
-            self.tableView.reloadData()
-        }
         
-        let menu = UIMenu(title: "정렬 및 필터링", children: [
-            UIAction(title: "마감일 순으로 보기", handler: sortAndFilterClosure),
-            UIAction(title: "제목 순으로 보기", handler: sortAndFilterClosure),
-            UIAction(title: "우선순위 낮은만 보기", handler: sortAndFilterClosure)
-        ])
-        
-        let item = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menu)
-        navigationItem.rightBarButtonItem = item
     }
-
+    
     func formatDate(_ date: Date?) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy.MM.dd"
@@ -99,10 +78,12 @@ class AllReminderViewController: BaseViewController {
             return formatter.string(from: Date())
         }
     }
+
 }
 
-extension AllReminderViewController: UITableViewDelegate, UITableViewDataSource {
+extension TodayReminderViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        print(list.count)
         return list.count
     }
     
@@ -111,6 +92,8 @@ extension AllReminderViewController: UITableViewDelegate, UITableViewDataSource 
         cell.selectionStyle = .none
         
         let row = list[indexPath.row]
+        
+        print(list[indexPath.row])
         cell.configure(with: row, formatDate: formatDate)
         
         return cell
