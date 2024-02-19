@@ -69,7 +69,7 @@ class DetailViewController: BaseViewController, DatePickerDelegate {
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,6 +77,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 2
         case 1:
+            return 1
+        case 2:
             return 1
         default:
             return 0
@@ -115,6 +117,12 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
                 .withTintColor(.white)
             cell.logoImageView.backgroundColor = .red
             
+        case 2:
+            cell.titleLabel.text = "이미지 등록"
+            cell.logoImageView.image = UIImage(systemName: "photo")?
+                .withRenderingMode(.alwaysOriginal)
+                .withTintColor(.white)
+            cell.logoImageView.backgroundColor = .systemBlue
         default:
             break
         }
@@ -132,8 +140,9 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 1 {
                 print("두번째 cell")
             }
+        } else if indexPath.section == 2 {
+            print("이미지 등록하기")
         }
-
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -21,6 +21,7 @@
 		2E0876112B7D26FB00ABB27D /* UIButton + Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876102B7D26FB00ABB27D /* UIButton + Configuration.swift */; };
 		2E0876142B7D293500ABB27D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876132B7D293500ABB27D /* DetailViewController.swift */; };
 		2E0876172B7D2C9A00ABB27D /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */; };
+		2E4D89AA2B833B1E000702B8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4D89A92B833B1E000702B8 /* FileManager+Extension.swift */; };
 		2E86C9562B7E4C9500009D59 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9552B7E4C9500009D59 /* DetailTableViewCell.swift */; };
 		2E86C9592B7E730300009D59 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9582B7E730300009D59 /* TimePickerViewController.swift */; };
 		2E86C95C2B7E78E100009D59 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2E86C95B2B7E78E100009D59 /* Realm */; };
@@ -47,6 +48,7 @@
 		2E0876102B7D26FB00ABB27D /* UIButton + Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Configuration.swift"; sourceTree = "<group>"; };
 		2E0876132B7D293500ABB27D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		2E0876162B7D2C9A00ABB27D /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
+		2E4D89A92B833B1E000702B8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		2E86C9552B7E4C9500009D59 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
 		2E86C9582B7E730300009D59 /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		2E86C9602B7E793B00009D59 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				2E0876042B7CE8BD00ABB27D /* UIView+addSubViews.swift */,
 				2E0876102B7D26FB00ABB27D /* UIButton + Configuration.swift */,
+				2E4D89A92B833B1E000702B8 /* FileManager+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				2E86C9642B7E7EC300009D59 /* AllReminderViewController.swift in Sources */,
 				2EC8AE012B811AD200C575D9 /* ReminderRepository.swift in Sources */,
 				2E08760F2B7D194800ABB27D /* AddReminderViewController.swift in Sources */,
+				2E4D89AA2B833B1E000702B8 /* FileManager+Extension.swift in Sources */,
 				2E86C9662B7E81B000009D59 /* AllReminderTableViewCell.swift in Sources */,
 				2E0876112B7D26FB00ABB27D /* UIButton + Configuration.swift in Sources */,
 				2E0875ED2B7CE36100ABB27D /* SceneDelegate.swift in Sources */,
