@@ -143,6 +143,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else if indexPath.section == 2 {
             print("이미지 등록하기")
+        } else {
+            print("그 외")
         }
     }
     

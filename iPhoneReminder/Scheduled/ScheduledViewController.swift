@@ -1,8 +1,8 @@
 //
-//  TodayReminderViewController.swift
+//  ScneduledViewController.swift
 //  iPhoneReminder
 //
-//  Created by hwijinjeong on 2/19/24.
+//  Created by hwijinjeong on 2/20/24.
 //
 
 import UIKit
@@ -10,32 +10,31 @@ import SnapKit
 import Then
 import RealmSwift
 
-class TodayReminderViewController: BaseViewController {
-    
+class ScheduledViewController: BaseViewController {
     let realm = try! Realm()
     var list: Results<Reminder>!
     let repository = ReminderRepository()
-    
+
     let titleLabel = UILabel().then {
-        $0.text = "오늘"
+        $0.text = "예정"
         $0.font = .boldSystemFont(ofSize: 24)
         $0.textColor = .white
     }
     
     let tableView = UITableView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         let start = Calendar.current.startOfDay(for: Date())
         
         let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
         
-        let predicate = NSPredicate(format: "date >= %@ && date < %@", start as NSDate, end as NSDate)
+        let predicate = NSPredicate(format: "date < %@ || date >= %@", start as NSDate, end as NSDate)
         
         list = realm.objects(Reminder.self).filter(predicate)
     }
-    
     
     override func configView() {
         view.backgroundColor = .black
@@ -78,10 +77,10 @@ class TodayReminderViewController: BaseViewController {
             return formatter.string(from: Date())
         }
     }
-
+    
 }
 
-extension TodayReminderViewController: UITableViewDelegate, UITableViewDataSource {
+extension ScheduledViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }

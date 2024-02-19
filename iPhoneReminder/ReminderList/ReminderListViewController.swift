@@ -33,8 +33,6 @@ class ReminderViewController: BaseViewController {
         return layout
     }
 
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configToolbar()
@@ -47,14 +45,7 @@ class ReminderViewController: BaseViewController {
     }
     
     @objc func reloadCollectionView() {
-        let indexPath2 = IndexPath(item: 2, section: 0)
-        collectionView.reloadItems(at: [indexPath2])
-        
-        let indexPath1 = IndexPath(item: 1, section: 0)
-        collectionView.reloadItems(at: [indexPath1])
-        
-        let indexPath0 = IndexPath(item: 0, section: 0)
-        collectionView.reloadItems(at: [indexPath0])
+        collectionView.reloadData()
     }
     
     override func configHierarchy() {
@@ -83,7 +74,6 @@ class ReminderViewController: BaseViewController {
         self.toolBar.setItems(items, animated: true)
     }
 
-    
     override func configLayout() {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(30)
@@ -124,10 +114,13 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
             let itemCount = repository.fetchTodayItems().count
             cell.countLabel.text = "\(itemCount)"
         } else if indexPath.item == 1 {
-            let itemCount = repository.fetchIsDoneItems().count
+            let itemCount = repository.fetch().count - repository.fetchTodayItems().count
             cell.countLabel.text = "\(itemCount)"
         } else if indexPath.item == 2 {
             let itemCount = repository.fetch().count
+            cell.countLabel.text = "\(itemCount)"
+        } else if indexPath.item == 3 {
+            let itemCount = repository.fetchIsDoneItems().count
             cell.countLabel.text = "\(itemCount)"
         }
 
@@ -137,6 +130,9 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
             let vc = TodayReminderViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.item == 1 {
+            let vc = ScheduledViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.item == 2 {
             let vc = AllReminderViewController()
