@@ -18,12 +18,13 @@ protocol ImagePickerDelegate: AnyObject {
 class AddReminderViewController: BaseViewController, ImagePickerDelegate {
     
     var takenImage: UIImage? = nil
-    
     func didPick(image: UIImage) {
         takenImage = image
     }
     
     let realm = try! Realm()
+    var list: Results<Reminder>!
+    var main: MyList!
     var dateData: Date? = nil
     var priorityData = ""
     let repository = ReminderRepository()
@@ -75,11 +76,15 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(dateReceivedNotification), name: NSNotification.Name("DateReceived"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(priorityReceivedNotification), name: NSNotification.Name("PriorityReceived"), object: nil)
+        
+        list = realm.objects(Reminder.self)
     }
     
     @objc func didSelectList(_ notification: Notification) {
-        if let title = notification.userInfo?["title"] as? String {
-            print("목록의 title: \(title)")
+        if let selectedMain = notification.userInfo?["title"] as? MyList {
+            main = selectedMain
+        } else {
+            print("Failed to get MyList from notification")
         }
     }
     
@@ -171,14 +176,21 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
     }
 
     @objc func addButtonTapped() {
-        print(realm.configuration.fileURL ?? "")
-        
         if titleTextView.text ==  "" || !didBeginEditingTitle {
             self.view.makeToast(nil, duration: 1.0, position: .center, title: "제목을 입력해주세요")
         } else {
-            let data = Reminder(title: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData)
+            let data = Reminder(title: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData, isDone: false)
             
-            repository.createItem(data)
+            
+            do {
+                try realm.write {
+                    main?.detail.append(data)
+                }
+                print("Added Reminder to MyList. Now MyList has \(main?.detail.count ?? 0) reminders.")
+            } catch {
+                print("Failed to add Reminder to MyList: \(error)")
+            }
+            
             dismiss(animated: true, completion: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddReminderDismissed"), object: nil)
             

@@ -14,7 +14,7 @@ class MyList: Object {
     @Persisted var name: String
     @Persisted var regDate: Date
     @Persisted var color: String
-    @Persisted var reminder: List<Reminder>
+    @Persisted var detail: List<Reminder>
     @Persisted var memo: Memo?
     
     convenience init(name: String, regDate: Date, color: String) {
@@ -40,6 +40,8 @@ class Reminder: Object {
     @Persisted var time: String?
     @Persisted var priority: String?
     @Persisted var isDone: Bool = false
+    // Inverse Relationship
+    @Persisted(originProperty: "detail") var main: LinkingObjects<MyList>
     
     convenience init(title: String, memo: String? = nil, date: Date? = nil, time: String? = nil, priority: String? = nil, isDone: Bool = false) {
         self.init()

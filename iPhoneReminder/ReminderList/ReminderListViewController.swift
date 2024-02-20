@@ -56,6 +56,7 @@ class ReminderViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
+        tableView.reloadData()
     }
     
     @objc func reloadCollectionView() {
@@ -192,7 +193,7 @@ extension ReminderViewController: UITableViewDelegate, UITableViewDataSource {
         let row = list[indexPath.row]
         
         cell.titleLabel.text = row.name
-        cell.countLabel.text = "\(row.reminder.count)"
+        cell.countLabel.text = "\(row.detail.count)"
         let color = UIColor(hexCode: row.color)
         cell.containerView.backgroundColor = color
 

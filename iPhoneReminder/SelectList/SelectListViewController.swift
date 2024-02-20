@@ -56,7 +56,7 @@ extension SelectListViewController: UITableViewDelegate, UITableViewDataSource {
         let row = list[indexPath.row]
         
         cell.titleLabel.text = row.name
-        cell.countLabel.text = "\(row.reminder.count)"
+        cell.countLabel.text = "\(row.detail.count)"
         let color = UIColor(hexCode: row.color)
         cell.containerView.backgroundColor = color
 
@@ -65,7 +65,7 @@ extension SelectListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = list[indexPath.row]
-        NotificationCenter.default.post(name: Notification.Name("didSelectList"), object: nil, userInfo: ["title": row.name])
+        NotificationCenter.default.post(name: Notification.Name("didSelectList"), object: nil, userInfo: ["title": row])
         navigationController?.popViewController(animated: true)
     }
     
