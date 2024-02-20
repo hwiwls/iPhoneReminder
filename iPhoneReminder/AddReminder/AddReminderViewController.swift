@@ -14,7 +14,7 @@ import Toast
 protocol ImagePickerDelegate: AnyObject {
     func didPick(image: UIImage)
 }
-
+// 나중에 tableview로 바꾸기
 class AddReminderViewController: BaseViewController, ImagePickerDelegate {
     
     var takenImage: UIImage? = nil
@@ -29,6 +29,8 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
     let repository = ReminderRepository()
     var didBeginEditingTitle = false    // 제목 입력 여부
     var didBeginEditingMemo = false
+    
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
     let titleTextView = UITextView().then {
         $0.font = UIFont.systemFont(ofSize: 16)
@@ -56,8 +58,16 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         $0.trailingBtnConfiguration(title: "세부 사항", font: .systemFont(ofSize: 16), foregroundColor: .white, padding: 270, image: UIImage(systemName: "chevron.right")?.withTintColor(.white), imageSize: CGSize(width: 16, height: 20))
     }
     
+    let listBtn = UIButton().then {
+        $0.trailingBtnConfiguration(title: "목록", font: .systemFont(ofSize: 16), foregroundColor: .white, padding: 270, image: UIImage(systemName: "chevron.right")?.withTintColor(.white), imageSize: CGSize(width: 16, height: 20))
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // here
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectList(_:)), name: Notification.Name("didSelectList"), object: nil)
         
         let customDarkGray = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
         view.backgroundColor = customDarkGray
@@ -65,6 +75,12 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(dateReceivedNotification), name: NSNotification.Name("DateReceived"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(priorityReceivedNotification), name: NSNotification.Name("PriorityReceived"), object: nil)
+    }
+    
+    @objc func didSelectList(_ notification: Notification) {
+        if let title = notification.userInfo?["title"] as? String {
+            print("목록의 title: \(title)")
+        }
     }
     
     @objc func dateReceivedNotification(notification: NSNotification) {
@@ -85,6 +101,9 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         
         detailBtn.addTarget(self, action: #selector(detailBtnClicked), for: .touchUpInside)
         detailBtn.layer.cornerRadius = 10
+        
+        listBtn.addTarget(self, action: #selector(listBtnClicked), for: .touchUpInside)
+        listBtn.layer.cornerRadius = 10
     }
     
     @objc func detailBtnClicked() {
@@ -93,12 +112,18 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func listBtnClicked() {
+        let vc = SelectListViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func configHierarchy() {
         view.addSubviews([
             titleTextView,
             memoTextView,
             borderView,
-            detailBtn
+            detailBtn,
+            listBtn
         ])
     }
     
@@ -123,6 +148,12 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         
         detailBtn.snp.makeConstraints {
             $0.top.equalTo(memoTextView.snp.bottom).offset(20)
+            $0.leading.trailing.equalTo(memoTextView)
+            $0.height.equalTo(45)
+        }
+        
+        listBtn.snp.makeConstraints {
+            $0.top.equalTo(detailBtn.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(memoTextView)
             $0.height.equalTo(45)
         }

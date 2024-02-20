@@ -86,7 +86,7 @@ class DetailViewController: BaseViewController, CalendarDelegate {
         photoImageView.snp.makeConstraints {
             $0.top.equalTo(tableView.snp.bottom).offset(20)
             $0.size.equalTo(350)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
