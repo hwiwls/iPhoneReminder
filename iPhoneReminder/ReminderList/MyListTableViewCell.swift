@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 class MyListTableViewCell: UITableViewCell {
-    lazy var logoImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "list.bullet")
-        $0.backgroundColor = .red
+    let containerView = UIView().then {
+        $0.backgroundColor = .clear
+        $0.clipsToBounds = true
+    }
+    
+    let logoImageView = UIImageView().then {
+        $0.image = UIImage(systemName: "list.bullet")?.withRenderingMode(.alwaysOriginal).withTintColor(.white)
 //        $0.isUserInteractionEnabled = false
     }
     
@@ -23,7 +29,7 @@ class MyListTableViewCell: UITableViewCell {
     
     let countLabel = UILabel().then {
         $0.text = "default"
-        $0.font = .systemFont(ofSize: 12)
+        $0.font = .systemFont(ofSize: 14)
         $0.textColor = .white
 //        $0.isUserInteractionEnabled = false
     }
@@ -47,6 +53,7 @@ class MyListTableViewCell: UITableViewCell {
     
     func configHierarchy() {
         contentView.addSubviews([
+            containerView,
             titleLabel,
             logoImageView,
             countLabel,
@@ -55,10 +62,15 @@ class MyListTableViewCell: UITableViewCell {
     }
     
     func configLayout() {
-        logoImageView.snp.makeConstraints {
+        containerView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(30)
             $0.leading.equalToSuperview().offset(16)
+        }
+        
+        logoImageView.snp.makeConstraints {
+            $0.center.equalTo(containerView)
+            $0.width.height.equalTo(20)
         }
         
         titleLabel.snp.makeConstraints {
@@ -82,7 +94,10 @@ class MyListTableViewCell: UITableViewCell {
     func configView() {
         backgroundColor = .darkGray
         titleLabel.backgroundColor = .clear
-        logoImageView.layer.cornerRadius = logoImageView.frame.width / 2
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.containerView.layer.cornerRadius = self.containerView.frame.width / 2
+        }
     }
     
 }

@@ -7,10 +7,12 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 class ReminderViewController: BaseViewController {
-    
+    let realm = try! Realm()
     let repository = ReminderRepository()
+    var list: Results<MyList>!
     
     let cellTitles = ["오늘", "예정", "전체", "완료됨"]
     let cellImages = [UIImage(systemName: "calendar.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.blue), UIImage(systemName: "calendar.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.red), UIImage(systemName: "envelope.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray), UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.lightGray)]
@@ -43,9 +45,13 @@ class ReminderViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(realm.configuration.fileURL ?? "")
+        
         configToolbar()
         
+        list = realm.objects(MyList.self)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name(rawValue: "AddReminderDismissed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "AddMyListDismissed"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +60,10 @@ class ReminderViewController: BaseViewController {
     
     @objc func reloadCollectionView() {
         collectionView.reloadData()
+    }
+    
+    @objc func reloadTableView() {
+        tableView.reloadData()
     }
     
     override func configHierarchy() {
@@ -123,7 +133,9 @@ class ReminderViewController: BaseViewController {
     }
     
     @objc func addListBtn() {
-        print(#function)
+        let vc = AddMyListViewController()
+        let nc = UINavigationController(rootViewController: vc)
+        present(nc, animated: true)
     }
 }
 
@@ -171,11 +183,18 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension ReminderViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyListTableViewCell", for: indexPath) as! MyListTableViewCell
+        
+        let row = list[indexPath.row]
+        
+        cell.titleLabel.text = row.name
+        cell.countLabel.text = "\(row.reminder.count)"
+        let color = UIColor(hexCode: row.color)
+        cell.containerView.backgroundColor = color
 
         return cell
     }

@@ -22,6 +22,17 @@ final class ReminderRepository {
         }
     }
     
+    func createMyList(_ item: MyList) {
+        do {
+            try realm.write {
+                realm.add(item)
+                print("Realm Crate")
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     func fetch() -> Results<Reminder> {
         return realm.objects(Reminder.self)
     }

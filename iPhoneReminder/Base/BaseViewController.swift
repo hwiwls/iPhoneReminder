@@ -13,9 +13,9 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         configHierarchy()
-        configView()
         configLayout()
         configNavigaiton()
+        configView()
     }
     
     func configHierarchy() {

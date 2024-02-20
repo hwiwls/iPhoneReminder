@@ -13,13 +13,15 @@ class MyList: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var name: String
     @Persisted var regDate: Date
+    @Persisted var color: String
     @Persisted var reminder: List<Reminder>
     @Persisted var memo: Memo?
     
-    convenience init(name: String, regDate: Date) {
+    convenience init(name: String, regDate: Date, color: String) {
         self.init()
         self.name = name
         self.regDate = regDate
+        self.color = color
     }
 }
 
