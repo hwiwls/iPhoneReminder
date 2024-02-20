@@ -9,6 +9,27 @@ import UIKit
 import Foundation
 import RealmSwift
 
+class MyList: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var name: String
+    @Persisted var regDate: Date
+    @Persisted var reminder: List<Reminder>
+    @Persisted var memo: Memo?
+    
+    convenience init(name: String, regDate: Date) {
+        self.init()
+        self.name = name
+        self.regDate = regDate
+    }
+}
+
+class Memo: EmbeddedObject {
+    @Persisted var contents: String
+    @Persisted var regDate: Date
+    @Persisted var editDate: Date
+}
+
+
 class Reminder: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var title: String

@@ -32,6 +32,7 @@
 		2E86C9612B7E793B00009D59 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9602B7E793B00009D59 /* RealmModel.swift */; };
 		2E86C9642B7E7EC300009D59 /* AllReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9632B7E7EC300009D59 /* AllReminderViewController.swift */; };
 		2E86C9662B7E81B000009D59 /* AllReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E86C9652B7E81B000009D59 /* AllReminderTableViewCell.swift */; };
+		2EC074712B8481A10061BF01 /* MyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC074702B8481A10061BF01 /* MyListTableViewCell.swift */; };
 		2EC8AE012B811AD200C575D9 /* ReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8AE002B811AD200C575D9 /* ReminderRepository.swift */; };
 		2ED5DF8C2B820187000EE2DC /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 2ED5DF8B2B820187000EE2DC /* Toast */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		2E86C9602B7E793B00009D59 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		2E86C9632B7E7EC300009D59 /* AllReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReminderViewController.swift; sourceTree = "<group>"; };
 		2E86C9652B7E81B000009D59 /* AllReminderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReminderTableViewCell.swift; sourceTree = "<group>"; };
+		2EC074702B8481A10061BF01 /* MyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListTableViewCell.swift; sourceTree = "<group>"; };
 		2EC8AE002B811AD200C575D9 /* ReminderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 			children = (
 				2E0875EE2B7CE36100ABB27D /* ReminderListViewController.swift */,
 				2E08760C2B7CE98800ABB27D /* ReminderListCollectionViewCell.swift */,
+				2EC074702B8481A10061BF01 /* MyListTableViewCell.swift */,
 			);
 			path = ReminderList;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				2EC8AE012B811AD200C575D9 /* ReminderRepository.swift in Sources */,
 				2E08760F2B7D194800ABB27D /* AddReminderViewController.swift in Sources */,
 				2E4D89AA2B833B1E000702B8 /* FileManager+Extension.swift in Sources */,
+				2EC074712B8481A10061BF01 /* MyListTableViewCell.swift in Sources */,
 				2E4D89B02B83586F000702B8 /* TodayReminderViewController.swift in Sources */,
 				2E86C9662B7E81B000009D59 /* AllReminderTableViewCell.swift in Sources */,
 				2E0876112B7D26FB00ABB27D /* UIButton + Configuration.swift in Sources */,

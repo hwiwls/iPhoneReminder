@@ -17,6 +17,14 @@ class ReminderViewController: BaseViewController {
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
     
+    private let myListLabel = UILabel().then {
+        $0.text = "나의 목록"
+        $0.font = .boldSystemFont(ofSize: 20)
+        $0.textColor = .white
+    }
+    
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    
     let toolBar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 100)).then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.barTintColor = .clear
@@ -51,6 +59,8 @@ class ReminderViewController: BaseViewController {
     override func configHierarchy() {
         view.addSubviews([
             collectionView,
+            myListLabel,
+            tableView,
             toolBar
         ])
     }
@@ -60,6 +70,12 @@ class ReminderViewController: BaseViewController {
         collectionView.dataSource = self
         collectionView.register(ReminderListCollectionViewCell.self, forCellWithReuseIdentifier: "ReminderListCollectionViewCell")
         collectionView.backgroundColor = .clear
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 45
+        tableView.backgroundColor = .clear
+        tableView.register(MyListTableViewCell.self, forCellReuseIdentifier: "MyListTableViewCell")
         
     }
 
@@ -79,6 +95,18 @@ class ReminderViewController: BaseViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(250)
+        }
+        
+        myListLabel.snp.makeConstraints {
+            $0.top.equalTo(collectionView.snp.bottom).offset(12)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(28)
+            $0.height.equalTo(22)
+        }
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(myListLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         toolBar.snp.makeConstraints {
@@ -141,3 +169,16 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
+extension ReminderViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyListTableViewCell", for: indexPath) as! MyListTableViewCell
+
+        return cell
+    }
+    
+    
+}
