@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import RealmSwift
 
-class AddMyListViewController: BaseViewController {
+class AddMyListViewController: BaseViewController, UITextFieldDelegate {
     let repository = ReminderRepository()
     
     private let listNameBackgroundview = UIView().then {
@@ -222,8 +222,4 @@ class AddMyListViewController: BaseViewController {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AddMyListDismissed"), object: nil)
         }
     }
-}
-
-extension AddMyListViewController: UITextFieldDelegate {
-    
 }

@@ -52,10 +52,13 @@ class ReminderViewController: BaseViewController {
         list = repository.fetchMyList()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name(rawValue: "AddReminderDismissed"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "AddMyListDismissed"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "MyListDetailCountUpdated"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         collectionView.reloadData()
+        tableView.reloadData()
         tableView.reloadData()
     }
     

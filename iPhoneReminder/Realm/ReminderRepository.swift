@@ -106,6 +106,7 @@ final class ReminderRepository {
         do {
             try realm.write {
                 list.detail.append(data)
+                NotificationCenter.default.post(name: NSNotification.Name("MyListDetailCountUpdated"), object: nil)
             }
         } catch {
             print(error)
