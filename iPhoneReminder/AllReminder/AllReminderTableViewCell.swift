@@ -122,7 +122,7 @@ class AllReminderTableViewCell: UITableViewCell {
     }
     
     func configure(with reminder: Reminder, formatDate: (Date?) -> String) {
-        titleLabel.text = reminder.title
+        titleLabel.text = reminder.reminderTitle
         memoLabel.text = reminder.memo
         if reminder.date != nil {
             dateLabel.text = formatDate(reminder.date)

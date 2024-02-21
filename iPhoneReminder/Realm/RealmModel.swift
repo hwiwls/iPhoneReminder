@@ -34,7 +34,7 @@ class Memo: EmbeddedObject {
 
 class Reminder: Object {
     @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var title: String
+    @Persisted var reminderTitle: String
     @Persisted var memo: String?
     @Persisted var date: Date?
     @Persisted var time: String?
@@ -44,9 +44,9 @@ class Reminder: Object {
     // Inverse Relationship
     @Persisted(originProperty: "detail") var main: LinkingObjects<MyList>
     
-    convenience init(title: String, memo: String? = nil, date: Date? = nil, time: String? = nil, priority: String? = nil, isDone: Bool = false, regDate: Date) {
+    convenience init(reminderTitle: String, memo: String? = nil, date: Date? = nil, time: String? = nil, priority: String? = nil, isDone: Bool = false, regDate: Date) {
         self.init()
-        self.title = title
+        self.reminderTitle = reminderTitle
         self.memo = memo
         self.date = date
         self.time = time

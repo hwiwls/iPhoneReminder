@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let configuration = Realm.Configuration(schemaVersion: 3) { migration, oldSchemeVersion in
+        let configuration = Realm.Configuration(schemaVersion: 4) { migration, oldSchemeVersion in
             
             if oldSchemeVersion < 1 {
                 print("0 -> 1")
@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("1 -> 2")
             } else if oldSchemeVersion < 3 {
                 print("2 -> 3")
+            } else if oldSchemeVersion < 4 {
+                print("3 -> 4")
+                migration.renameProperty(onType: Reminder.className(), from: "title", to: "reminderTitle")
             }
             
         }
