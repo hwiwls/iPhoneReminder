@@ -179,7 +179,7 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         if titleTextView.text ==  "" || !didBeginEditingTitle {
             self.view.makeToast(nil, duration: 1.0, position: .center, title: "제목을 입력해주세요")
         } else {
-            let data = Reminder(title: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData, isDone: false)
+            let data = Reminder(title: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData, isDone: false, regDate: Date())
             
             
             do {

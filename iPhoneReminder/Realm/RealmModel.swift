@@ -40,10 +40,11 @@ class Reminder: Object {
     @Persisted var time: String?
     @Persisted var priority: String?
     @Persisted var isDone: Bool = false
+    @Persisted var regDate: Date
     // Inverse Relationship
     @Persisted(originProperty: "detail") var main: LinkingObjects<MyList>
     
-    convenience init(title: String, memo: String? = nil, date: Date? = nil, time: String? = nil, priority: String? = nil, isDone: Bool = false) {
+    convenience init(title: String, memo: String? = nil, date: Date? = nil, time: String? = nil, priority: String? = nil, isDone: Bool = false, regDate: Date) {
         self.init()
         self.title = title
         self.memo = memo
@@ -51,5 +52,6 @@ class Reminder: Object {
         self.time = time
         self.priority = priority
         self.isDone = isDone
+        self.regDate = regDate
     }
 }
