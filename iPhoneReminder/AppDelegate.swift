@@ -13,10 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let configuration = Realm.Configuration(schemaVersion: 1) { migration, oldSchemeVersion in
+        let configuration = Realm.Configuration(schemaVersion: 2) { migration, oldSchemeVersion in
             
             if oldSchemeVersion < 1 {
                 print("0 -> 1")
+            } else if oldSchemeVersion < 2 {
+                print("1 -> 2")
             }
             
         }
