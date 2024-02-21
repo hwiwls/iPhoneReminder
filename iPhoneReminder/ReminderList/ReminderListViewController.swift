@@ -49,7 +49,7 @@ class ReminderViewController: BaseViewController {
         
         configToolbar()
         
-        list = realm.objects(MyList.self)
+        list = repository.fetchMyList()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name(rawValue: "AddReminderDismissed"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "AddMyListDismissed"), object: nil)
     }
@@ -155,10 +155,10 @@ extension ReminderViewController: UICollectionViewDelegate, UICollectionViewData
             let itemCount = repository.fetchTodayItems().count
             cell.countLabel.text = "\(itemCount)"
         } else if indexPath.item == 1 {
-            let itemCount = repository.fetch().count - repository.fetchTodayItems().count
+            let itemCount = repository.fetchReminder().count - repository.fetchTodayItems().count
             cell.countLabel.text = "\(itemCount)"
         } else if indexPath.item == 2 {
-            let itemCount = repository.fetch().count
+            let itemCount = repository.fetchReminder().count
             cell.countLabel.text = "\(itemCount)"
         } else if indexPath.item == 3 {
             let itemCount = repository.fetchIsDoneItems().count

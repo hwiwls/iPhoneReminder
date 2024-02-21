@@ -11,7 +11,6 @@ import Then
 import RealmSwift
 
 class AddMyListViewController: BaseViewController {
-    let realm = try! Realm()
     let repository = ReminderRepository()
     
     private let listNameBackgroundview = UIView().then {

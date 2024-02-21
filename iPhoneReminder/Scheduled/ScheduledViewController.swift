@@ -11,7 +11,7 @@ import Then
 import RealmSwift
 
 class ScheduledViewController: BaseViewController {
-    let realm = try! Realm()
+    
     var list: Results<Reminder>!
     let repository = ReminderRepository()
 
@@ -26,14 +26,7 @@ class ScheduledViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        let start = Calendar.current.startOfDay(for: Date())
-        
-        let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
-        
-        let predicate = NSPredicate(format: "date < %@ || date > %@", start as NSDate, end as NSDate)
-        
-        list = realm.objects(Reminder.self).filter(predicate)
+        list = repository.getNotTodayReminder()
     }
     
     override func configView() {

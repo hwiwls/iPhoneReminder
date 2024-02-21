@@ -12,7 +12,6 @@ import RealmSwift
 
 class SelectListViewController: BaseViewController {
     
-    let realm = try! Realm()
     let repository = ReminderRepository()
     var list: Results<MyList>!
     
@@ -20,7 +19,7 @@ class SelectListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        list = realm.objects(MyList.self)
+        list = repository.fetchMyList()
     }
     
     override func configHierarchy() {

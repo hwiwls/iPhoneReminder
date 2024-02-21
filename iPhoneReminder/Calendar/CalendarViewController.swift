@@ -14,8 +14,7 @@ import RealmSwift
 class CalendarViewController: BaseViewController {
     weak var delegate: CalendarDelegate?
     
-    let realm = try! Realm()    // 1. Realm 위치에 접근
-    var list: Results<Reminder>!    // Results 객체는 데이터베이스의 상태를 실시간으로 반영
+    var list: Results<Reminder>!
     let repository = ReminderRepository()
 
     let calendar = FSCalendar().then {
@@ -60,15 +59,6 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print(date)
         
-        // 오늘 시작 날짜
-        let start = Calendar.current.startOfDay(for: date)
-        
-        // 오늘 끝 날짜
-        let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
-        
-        // 쿼리 작성
-        let predicate = NSPredicate(format: "date >= %@ && date < %@", start as NSDate, end as NSDate)
-        
-        list = realm.objects(Reminder.self).filter(predicate)
+        list = repository.getTodayReminder()
     }
 }

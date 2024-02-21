@@ -33,8 +33,12 @@ final class ReminderRepository {
         }
     }
     
-    func fetch() -> Results<Reminder> {
+    func fetchReminder() -> Results<Reminder> {
         return realm.objects(Reminder.self)
+    }
+    
+    func fetchMyList() -> Results<MyList> {
+        return realm.objects(MyList.self)
     }
     
     func fetchSortedByDate() -> Results<Reminder> {
@@ -78,6 +82,30 @@ final class ReminderRepository {
         do {
             try realm.write {
                 realm.delete(item)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func getTodayReminder() -> Results<Reminder> {
+        let start = Calendar.current.startOfDay(for: Date())
+        let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
+        let predicate = NSPredicate(format: "date >= %@ && date < %@", start as NSDate, end as NSDate)
+        return realm.objects(Reminder.self).filter(predicate)
+    }
+    
+    func getNotTodayReminder() -> Results<Reminder> {
+        let start = Calendar.current.startOfDay(for: Date())
+        let end: Date = Calendar.current.date(byAdding: .day, value: 1, to: start) ?? Date()
+        let predicate = NSPredicate(format: "date < %@ || date > %@", start as NSDate, end as NSDate)
+        return realm.objects(Reminder.self).filter(predicate)
+    }
+    
+    func addReminder(to list: MyList, data: Reminder) {
+        do {
+            try realm.write {
+                list.detail.append(data)
             }
         } catch {
             print(error)

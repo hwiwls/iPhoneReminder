@@ -22,7 +22,6 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         takenImage = image
     }
     
-    let realm = try! Realm()
     var list: Results<Reminder>!
     var main: MyList!
     var dateData: Date? = nil
@@ -77,7 +76,7 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(priorityReceivedNotification), name: NSNotification.Name("PriorityReceived"), object: nil)
         
-        list = realm.objects(Reminder.self)
+        list = repository.fetchReminder()
     }
     
     @objc func didSelectList(_ notification: Notification) {
@@ -181,14 +180,10 @@ class AddReminderViewController: BaseViewController, ImagePickerDelegate {
         } else {
             let data = Reminder(reminderTitle: titleTextView.text, memo: memoTextView.text, date: dateData, priority: priorityData, isDone: false, regDate: Date())
             
-            
-            do {
-                try realm.write {
-                    main?.detail.append(data)
-                }
-                print("Added Reminder to MyList. Now MyList has \(main?.detail.count ?? 0) reminders.")
-            } catch {
-                print("Failed to add Reminder to MyList: \(error)")
+            if main == nil {
+                repository.createItem(data)
+            } else {
+                repository.addReminder(to: main, data: data)
             }
             
             dismiss(animated: true, completion: nil)

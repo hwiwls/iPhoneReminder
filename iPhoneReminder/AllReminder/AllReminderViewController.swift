@@ -32,7 +32,7 @@ class AllReminderViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        list = repository.fetch()
+        list = repository.fetchReminder()
         
         tableView.reloadData()
     }
