@@ -41,6 +41,7 @@ class Reminder: Object {
     @Persisted var priority: String?
     @Persisted var isDone: Bool = false
     @Persisted var regDate: Date
+    @Persisted var count: Int
     // Inverse Relationship
     @Persisted(originProperty: "detail") var main: LinkingObjects<MyList>
     
@@ -53,5 +54,6 @@ class Reminder: Object {
         self.priority = priority
         self.isDone = isDone
         self.regDate = regDate
+        self.count = 0
     }
 }

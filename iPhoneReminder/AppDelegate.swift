@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let configuration = Realm.Configuration(schemaVersion: 4) { migration, oldSchemeVersion in
+        let configuration = Realm.Configuration(schemaVersion: 5) { migration, oldSchemeVersion in
             
             if oldSchemeVersion < 1 {
                 print("0 -> 1")
@@ -24,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if oldSchemeVersion < 4 {
                 print("3 -> 4")
                 migration.renameProperty(onType: Reminder.className(), from: "title", to: "reminderTitle")
+            } else if oldSchemeVersion < 5 {
+                migration.enumerateObjects(ofType: Reminder.className()) { oldObject, newObject in
+                    guard let new = newObject else { return }
+                    new["count"] = 10
+                }
             }
             
         }
